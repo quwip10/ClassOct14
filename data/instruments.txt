@@ -1,0 +1,20 @@
+mandolin
+cello
+harmonica
+piano
+spoon
+guitar
+drum
+banjalelly
+violin
+melodica
+harp
+harpsichord
+moog synth
+kazoo
+bass
+bongo
+lute
+hurdygurgy
+hurdygurdy
+orcarina
