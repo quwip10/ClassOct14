@@ -1,37 +1,73 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
+# Exercise 8-3 calc.py with regex
+# Page 182-183
+import re
+import sys
 
-def add(x, y):
-    return x + y
+def get_equation():
+    try:
+        op, nums = split_regex(input(
+            "Enter equation in form [Val] [operator] [Val2]:"
+            ))
+        values_list = []
+        try:
+            for i in nums:
+                values_list.append(int(i))
+        except ValueError:
+            pass
+        finally:
+            if len(values_list) < 2:
+                raise IndexError
+            else:
+                return op, values_list
+    except IndexError:
+        print(
+            "Equation not in form [Val] [operator] [Val2]:"
+            )
+        sys.exit(1)
 
-def sub(x, y):
-    return x - y
+def split_regex(stringy):
+    numbers = r"[+\-\*/]"
+    operator = r""
+    return (re.search(numbers, stringy).group()[0],
+            re.split(numbers, stringy))
 
-def mul(x, y):
-    return x * y
+def addition(numbers):
+    result = 0
+    for i in numbers:
+        result += i
+    return result
 
-def div(x, y):
-    return x/y
+def subtraction(numbers):
+    result = numbers[0]
+    for i in numbers[1:]:
+        result -= i
+    return result
 
-while True:
-    expr = input("Enter a math expression: ")
+def division(numbers):
+    result = numbers[0]
+    try:
+        for i in numbers[1:]:
+            result /= i
+    except ZeroDivisionError:
+        print("Cannot divide by zero!")
+        sys.exit(1)
+    return result
 
-    if expr.lower() == 'q':
-        break
+def custom_math(operator, numbers):
+    math_dict = {
+                 "+": addition,
+                 "-": subtraction,
+                 "/": division
+                 }
 
-    v1, op, v2 = expr.split()
-    v1 = float(v1)
-    v2 = float(v2)
+    return(math_dict[operator](numbers))
 
-    if op == '+':
-        result = add(v1, v2)
-    elif op == '-':
-        result = sub(v1, v2)
-    elif op == '*':
-        result = mul(v1, v2)
-    elif op == '/':
-        result = div(v1, v2)
-    else:
-        print("Bad operator!")
-        continue
+if __name__ == "__main__":
+    matched_operator = None
 
-    print("{:.3f}".format(result))
+    while not matched_operator:
+        matched_operator, number_list = get_equation()
+        print(custom_math(matched_operator, number_list))
+
+
