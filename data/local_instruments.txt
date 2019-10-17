@@ -1,0 +1,9 @@
+bongo|percussion|3
+cello|string|5
+drum|percussion|4
+guitar|string|5
+harmonica|woodwind|5
+kazoo|woodwind|1
+mandolin|string|5
+piano|percussion|5
+spoon|percussion|5

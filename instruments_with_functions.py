@@ -76,4 +76,13 @@ def is_valid_instrument(instrument):
         return (True, None)
 
 
-main()  # calling the main functions
+# if this is running directly, run main
+if __name__ == "__main__":
+    main()
+# else just be quiet and the calling code will get what it wants
+
+# main()  # calling the main functions
+
+# print("Current dunder name is ", __name__)
+# __main__ - Direct Execution
+# instruments_with_functions # imported
