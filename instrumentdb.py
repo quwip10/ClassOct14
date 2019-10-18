@@ -3,9 +3,11 @@ from instrument import Instrument
 
 class InstrumentDb:
 
+    default_delimiter = "|"  # class level, not associated with self, but is with cls
+
     def __init__(self, path="./data/local_instruments.txt"):
         self._path = path
-        self._delimiter = "|"
+        self._delimiter = default_delimiter
         self.instruments = []
 
     def load(self):
@@ -26,10 +28,17 @@ class InstrumentDb:
                 line = f"{instrument.name}|{instrument.family}|{instrument.difficulty}\n"
                 file_out.write(line)
 
+    @classmethod
+    def get_default_delimiter(cls):
+        return cls.default_delimiter
+
 
 # ----------------
 
 def main():
+
+    delimiter = InstrumentDb.get_default_delimiter()
+
     db = InstrumentDb()
 
     db.load()
